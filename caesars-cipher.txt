@@ -1,0 +1,22 @@
+function rot13(str) {
+  const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const string = str.split("")
+  const newStrArr = []
+ 
+  for(let i = 0; i < string.length; i++){
+    let index = alphabet.indexOf(string[i])
+    if(index !== -1){
+      let newIndex = index -13
+      if(newIndex < 0){
+        newIndex += 26
+      }
+      newStrArr[i] = alphabet[newIndex]
+   }else{
+     newStrArr[i] = string[i]
+   }
+  }
+
+  return newStrArr.join("")
+}
+
+rot13("SERR PBQR PNZC");

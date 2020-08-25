@@ -1,0 +1,191 @@
+function convertToRoman(num) {
+  var arr = num.toString(10).split('').map(Number);
+  let counter = 0
+  console.log(arr)
+  var letter = []
+  if(num >= 1000){
+    thousands(arr[counter])
+  }else if(num >= 100){
+    hundreds(arr[counter])
+  }else if(num >= 10){
+    tens(arr[counter])
+  }else{
+    digits(arr[counter])
+  }
+
+
+function thousands(x){
+  switch(x){
+    case 1:
+       letter[counter] = "M"
+       counter += 1
+       hundreds(arr[counter])
+       break
+    case 2:
+      letter[counter] = "MM"
+      counter += 1
+      hundreds(arr[counter])
+      break
+    case 3:
+       letter[counter] = "MMM"
+       counter += 1
+       hundreds(arr[counter])
+       break
+    case 4:
+      letter[counter] = "MMMM"
+      counter += 1
+      hundreds(arr[counter])
+      break
+  }
+}
+
+function hundreds(x){
+  switch(x){
+    case 1:
+       letter[counter] = "C"
+       counter += 1
+       tens(arr[counter])
+       break
+    case 2:
+      letter[counter] = "CC"
+      counter += 1
+      tens(arr[counter])
+      break
+    case 3:
+       letter[counter] = "CCC"
+       counter += 1
+       tens(arr[counter])
+       break
+    case 4:
+      letter[counter] = "CD"
+      counter += 1
+      tens(arr[counter])
+      break
+    case 5:
+       letter[counter] = "D"
+       counter += 1
+       tens(arr[counter])
+       break
+    case 6:
+      letter[counter] = "DC"
+      counter += 1
+      tens(arr[counter])
+      break
+    case 7:
+       letter[counter] = "DCC"
+       counter += 1
+       tens(arr[counter])
+       break
+    case 8:
+      letter[counter] = "DCCC"
+      counter += 1
+      tens(arr[counter])
+      break
+    case 9:
+       letter[counter] = "CM"
+       counter += 1
+       tens(arr[counter])
+       break
+    case 0:
+      letter[counter] = ""
+      counter += 1
+      tens(arr[counter])
+      break
+  }
+}
+
+  function tens(x){
+  switch(x){
+    case 1:
+       letter[counter] = "X"
+       counter += 1
+       digits(arr[counter])
+       break
+    case 2:
+      letter[counter] = "XX"
+      counter += 1
+      digits(arr[counter])
+      break
+    case 3:
+       letter[counter] = "XXX"
+       counter += 1
+       digits(arr[counter])
+       break
+    case 4:
+      letter[counter] = "XL"
+      counter += 1
+       digits(arr[counter])
+      break
+    case 5:
+       letter[counter] = "L"
+       counter += 1
+       digits(arr[counter])
+       break
+    case 6:
+      letter[counter] = "LX"
+      counter += 1
+      digits(arr[counter])
+      break
+    case 7:
+       letter[counter] = "LXX"
+       counter += 1
+       digits(arr[counter])
+       break
+    case 8:
+      letter[counter] = "LXXX"
+      counter += 1
+      digits(arr[counter])
+      break
+    case 9:
+       letter[counter] = "XC"
+       counter += 1
+       digits(arr[counter])
+       break
+    case 0:
+      letter[counter] = ""
+      counter += 1
+      digits(arr[counter])
+      break
+  }
+}
+
+ function digits(x){
+  switch(x){
+    case 1:
+       letter[counter] = "I"
+       break
+    case 2:
+      letter[counter] = "II"
+      break
+    case 3:
+       letter[counter] = "III"
+       break
+    case 4:
+      letter[counter] = "IV"
+      break
+    case 5:
+       letter[counter] = "V"
+       break
+    case 6:
+      letter[counter] = "VI"
+      break
+    case 7:
+       letter[counter] = "VII"
+       break
+    case 8:
+      letter[counter] = "VIII"
+      break
+    case 9:
+       letter[counter] = "IX"
+       break
+    case 0:
+      letter[counter] = ""
+      break
+  }
+}
+
+return letter.join("")
+
+
+}
+convertToRoman(36);

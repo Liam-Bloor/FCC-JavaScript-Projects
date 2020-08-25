@@ -1,0 +1,64 @@
+function telephoneCheck(str) {
+
+  //check for bad characters
+  let regex = /\*|&|!|#|\?|^-/g
+  if(str.match(regex) !== null){
+    console.log("Has bad characters")
+    return false
+  }
+
+  //check for closing brace with no opening
+  let openingBrace = false
+  let closingBrace = false
+  for(let i = 0; i < str.length; i++){
+    if(str.charAt(i) === "("){
+      openingBrace = true
+    }
+    if(str.charAt(i) === ")"){
+      closingBrace = true
+    }
+    if(closingBrace && !openingBrace){
+      return false
+    }
+  }
+  if(str.charAt(0) === "(" && str.charAt(str.length-1) === ")"){
+    return false
+  }
+
+  //opening brace with no closing
+  if(!closingBrace && openingBrace){
+    return false
+  }
+
+  //check for if first single digit === 1
+  let regex2 = /^\d+(\s+|\(+)/g
+  let hasAreaCode = false
+ 
+  if(str.match(regex2) !== null){
+    console.log("Has area code")
+    hasAreaCode = true
+    if((str.match(regex2).join("").split("")[0] != 1 )){
+      console.log("Area code not valid")
+      return false
+    }
+  }
+
+  //check length without non-numeric characters
+  let regex3 = /[0-9]+/g
+  let numbers = str.match(regex3)
+  let jointNums = numbers.join("")
+  if(hasAreaCode){
+    if(jointNums.length !== 11){
+      console.log("Not the correct length")
+      return false
+    }
+  }else{
+    if(jointNums.length !== 10){
+      console.log("Not the correct length")
+      return false
+    }
+  }
+  return true
+}
+
+telephoneCheck("1 555-555-5555");

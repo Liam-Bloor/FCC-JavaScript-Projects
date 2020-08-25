@@ -1,0 +1,28 @@
+function palindrome(str) {
+  var regex = /[a-z]|[A-Z]|[0-9]/g
+  let string = str.toLowerCase().match(regex)
+  let truth = false
+  let trueCount = 0
+  const strArr = []
+  const reversed = []
+  for(let i = 0; i < string.length; i++){
+    strArr[i] = string[i]
+  }
+  for(let j = 0; j < strArr.length; j++){
+    reversed[j] = strArr[strArr.length - j - 1]
+    if(reversed[j] === strArr[j]){
+      trueCount += 1
+    }
+  }
+
+  if(trueCount === strArr.length){
+    truth = true
+  }
+  console.log(strArr)
+  console.log(reversed)
+  return truth
+}
+
+
+
+palindrome("1 eye for of 1 eye.");

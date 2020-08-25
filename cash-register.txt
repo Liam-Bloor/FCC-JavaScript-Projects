@@ -1,0 +1,86 @@
+function checkCashRegister(price, cash, cid) {
+  var change = cash-price;
+  var totalcid = 0;
+  let regex = /([0-9]+\.[0-9]+|[0-9]+)/g
+  let cidCash = cid.join("").match(regex)
+  let changeText = ["PENNY", "NICKEL", "DIME", "QUARTER", "ONE", "FIVE", "TEN", "TWENTY", "ONE HUNDRED"]
+  let changeValue = [0.01, 0.05, 0.1, 0.25, 1, 5, 10, 20, 100]
+  let numBills = []
+  for(let i = 0; i < cidCash.length; i++){
+      numBills[i] = (cidCash[i] / changeValue[i]).toFixed()
+  }
+  
+
+  for(let i = 0; i < cidCash.length; i++){
+    totalcid += parseFloat(cidCash[i])
+  }
+
+  if(change > totalcid){
+    return {status: "INSUFFICIENT_FUNDS", change: []}
+  }
+  let originalChange = change
+    let j = changeValue.length
+    let changeGiven = []
+    do{
+      j -= 1
+      if(change >= changeValue[j] && numBills[j] > 0){
+        let numGiven = 0
+        do{
+          change -= changeValue[j]
+          change = parseFloat(change).toPrecision(4)
+          numGiven += 1
+        }while(((change - changeValue[j] >= 0) && (numGiven + 1 <= numBills[j])))
+        changeGiven[j] = numGiven
+
+      }
+      if(j < 0){
+        console.log("failed")
+        return {status: "INSUFFICIENT_FUNDS", change: []}
+      }
+    }while(change > 0)
+
+    for(let i = 0; i < changeGiven.length; i++){
+      if(changeGiven[i] == null){
+        changeGiven[i] = 0
+      }
+      
+    }
+    console.log(changeGiven)
+  
+  let medArr = []
+  let outputArr = []
+
+  for(let n = changeGiven.length - 1; n >= 0; --n){
+    if(changeGiven[n] !== 0){
+      medArr.push(changeText[n])
+      medArr.push(changeGiven[n]*changeValue[n])
+      outputArr.push(medArr)
+      medArr = []
+  }
+    
+  }
+  
+  console.log(outputArr)
+
+  if(originalChange === totalcid){
+    
+    for(let i = 0; i < changeValue.length; i++){
+      if(changeGiven[i] == undefined){
+        changeGiven[i] = 0
+        medArr.push(changeText[i])
+        medArr.push(changeGiven[i]*changeValue[i])
+        outputArr.push(medArr)
+      medArr = []
+      }
+    }
+    console.log(outputArr)
+    return {status: "CLOSED", change: outputArr}
+  }
+
+  if(change < totalcid){
+    return {status: "OPEN", change: outputArr}
+  }
+
+}
+
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
